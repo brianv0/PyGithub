@@ -128,10 +128,9 @@ class Hook(github.GithubObject.CompletableGithubObject):
             self.url
         )
 
-    def edit(self, name, config, events=github.GithubObject.NotSet, add_events=github.GithubObject.NotSet, remove_events=github.GithubObject.NotSet, active=github.GithubObject.NotSet):
+    def edit(self,  config, events=github.GithubObject.NotSet, add_events=github.GithubObject.NotSet, remove_events=github.GithubObject.NotSet, active=github.GithubObject.NotSet):
         """
         :calls: `PATCH /repos/:owner/:repo/hooks/:id <http://developer.github.com/v3/repos/hooks>`_
-        :param name: string
         :param config: dict
         :param events: list of string
         :param add_events: list of string
@@ -139,14 +138,12 @@ class Hook(github.GithubObject.CompletableGithubObject):
         :param active: bool
         :rtype: None
         """
-        assert isinstance(name, (str, unicode)), name
         assert isinstance(config, dict), config
         assert events is github.GithubObject.NotSet or all(isinstance(element, (str, unicode)) for element in events), events
         assert add_events is github.GithubObject.NotSet or all(isinstance(element, (str, unicode)) for element in add_events), add_events
         assert remove_events is github.GithubObject.NotSet or all(isinstance(element, (str, unicode)) for element in remove_events), remove_events
         assert active is github.GithubObject.NotSet or isinstance(active, bool), active
         post_parameters = {
-            "name": name,
             "config": config,
         }
         if events is not github.GithubObject.NotSet:
